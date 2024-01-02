@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="&lt;model-viewer&gt; template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" href="./styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>&lt;model-viewer&gt; NewYear by Aivarse</title>
+</head>
+<body>
+<style>
+    #info-button {
+        position: absolute;
+        top: 200px;
+        right: 10px;
+        font-size: 20px;
+        background: none;
+        border: none;
+        color: #000000;
+        cursor: pointer;
+    }
+
+    #audio-button {
+        position: absolute;
+        top: 240px;
+        right: 8px;
+        font-size: 20px;
+        background: none;
+        border: none;
+        color: #000000;
+        cursor: pointer;
+    }
+    
+    #anima{
+      background-image: url(play.png);
+      background-repeat: no-repeat;
+      background-size: 20px 20px;
+      background-position: 12px 50%;
+      background-color: #fff;
+      position: absolute;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      bottom: 50px;
+      left: 49%;
+      padding: 0px 16px 0px 40px;
+      font-family: Roboto Regular, Helvetica Neue, sans-serif;
+      font-size: 14px;
+      color:#4285f4;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 18px;
+      border: 1px solid #DADCE0;
+    }
+
+
+
+    #ins-1{
+      position: absolute;
+      font-size: medium;
+      background-color: #ffffff00;
+      left: 18%;
+      bottom: 80px;
+      color: #000000;
+
+    }
+
+    #zoomIn, #zoomOut {
+
+      background-repeat: no-repeat;
+      background-size: 20px 20px;
+      background-position: 12px 50%;
+      background-color: #fff;
+      position: absolute;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      bottom: 81px;
+      padding: 0px 16px 0px 40px;
+      font-family: Roboto Regular, Helvetica Neue, sans-serif;
+      font-size: 14px;
+      color:#4285f4;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 18px;
+      border: 1px solid #DADCE0;
+    }
+
+    #zoomIn{
+      background-image: url(zoom-in.png);
+      left: 15%;
+    }
+
+    #zoomOut{
+      background-image: url(zoom-out.png);
+      left: 85%;
+    }
+
+    #info {
+      background-image: url(information.png);
+      background-repeat: no-repeat;
+      background-size: 20px 20px;
+      background-position: 12px 50%;
+      background-color: #fff;
+      position: absolute;
+      left: 20%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      bottom: 50px;
+      padding: 0px 16px 0px 40px;
+      font-family: Roboto Regular, Helvetica Neue, sans-serif;
+      font-size: 14px;
+      color:#4285f4;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 18px;
+      border: 1px solid #DADCE0;
+    }
+
+    #audio {
+      background-image: url(audio.png);
+      background-repeat: no-repeat;
+      background-size: 20px 20px;
+      background-position: 12px 50%;
+      background-color: #fff;
+      position: absolute;
+      left: 80%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      bottom: 50px;
+      padding: 0px 16px 0px 40px;
+      font-family: Roboto Regular, Helvetica Neue, sans-serif;
+      font-size: 14px;
+      color:#4285f4;
+      height: 36px;
+      line-height: 36px;
+      border-radius: 18px;
+      border: 1px solid #DADCE0;
+    }
+
+    .Hotspot {
+      display: none;
+      background: #fff;
+      border-radius: 32px;
+      border: 0;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+      box-sizing: border-box;
+      cursor: pointer;
+      height: 24px;
+      padding: 8px;
+      position: relative;
+      transition: opacity 0.3s;
+      width: 24px;
+}
+
+.Hotspot:not([data-visible]) {
+  background: transparent;
+  border: 4px solid #fff;
+  box-shadow: none;
+  height: 32px;
+  pointer-events: none;
+  width: 32px;
+}
+
+.Hotspot:focus {
+  border: 4px solid rgb(0, 128, 200);
+  height: 32px;
+  outline: none;
+  width: 32px;
+}
+
+#ar-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        z-index: 1000;
+    }
+
+    #ar-popup p {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    #ar-popup button {
+        background: #4285f4;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-left: 30px;
+    }
+
+.Hotspot > * {
+  opacity: 1;
+  transform: translateY(-50%);
+}
+
+#receive-gift-button {
+        position: absolute;
+        bottom: 50px; /* Adjust the top position as needed */
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        background: #4285f4;
+        border: none;
+        color: #ffffff;
+        cursor: pointer;
+        padding: 10px 20px;
+        border-radius: 20px;
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #receive-gift-button img {
+        margin-right: 10px; /* Adjust the margin as needed */
+        width: 24px;
+        height: 24px;
+    }
+
+.HotspotAnnotation{
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  color: rgba(0, 0, 0, 0.8);
+  display: none;
+  font-family: Futura, Helvetica Neue, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  left: calc(100% + 1em);
+  max-width: 128px;
+  overflow-wrap: break-word;
+  padding: 0.5em 1em;
+  position: absolute;
+  top: 50%;
+  width: max-content;
+}
+
+.Hotspot:not([data-visible]) > * {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(-50% + 4px));
+  transition: transform 0.3s, opacity 0.3s;
+}
+  
+</style>
+
+<model-viewer  id="my-model" src="./NewYear.glb" quick-look-browsers="safari chrome" ar ar-modes="webxr scene-viewer quick-look" poster="poster.webp" ar ar-modes="webxr scene-viewer" scale="0.12 0.12 0.12"  camera-controls  shadow-intensity="1">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+    <button id="receive-gift-button">
+        <i class="fa fa-gift" style="font-size:14px ;margin-right: 5px;"></i>
+        Click Receive Gift
+    </button>
+    <button  slot="ar-button" id="ar-button">View in your space
+    </button>
+    <div id="ar-prompt">
+        <img src="ar_hand_prompt.png">
+    </div>
+   
+    <!--button id="info-button">ℹ️</button>
+        
+    <button id="audio-button">🔊</button-->
+      <div>
+       
+        <!--button id="zoomIn">+</button>
+        <button id="zoomOut">-</button-->
+        <p id="ins-1"><img src="pinch.png" width="20px" height="20px"> Pinch to zoom in and zoom out</p>
+      </div>
+      
+      <div id="ar-popup">
+        <p>Make sure the lighting of the area is optimal.</p>
+        <button id="proceed-button">Proceed</button>
+    </div>
+  
+</model-viewer>
+
+
+<audio id="audio" src="./ttsmaker-file-2023-12-31-17-2-11_30shtMfz.mp3">
+
+</audio>
+
+<script>
+  // Zooming
+  /*let fovNumber = 30;
+
+  plusButton.addEventListener('click', () => {
+    if(fovNumber>15){
+      fovNumber -= 5;
+    }
+    console.log('Zooming in. New fovNumber:', fovNumber);
+    document.getElementById("my-model").scale /=5; 
+    updateFieldOfView();
+  });
+
+  minusButton.addEventListener('click', () => {
+    if(fovNumber<30){
+      fovNumber += 5;
+    }
+    console.log('Zooming out. New fovNumber:', fovNumber);
+    document.getElementById("my-model").scale *=5; 
+    updateFieldOfView();
+  });
+
+  function updateFieldOfView() {
+    console.log('Updating field of view. New fovNumber:', fovNumber);
+    document.getElementById("my-model").fieldOfView = `${fovNumber}deg`;
+  }
+
+  let currentScale = 1;*/
+
+  // Function to handle zooming in AR mode
+  /*function zoomInAR() {
+    
+    const scaleFactor = 1.2;
+    currentScale *= scaleFactor;
+
+    
+    modelViewer.scale = currentScale;
+
+    console.log('Zooming in AR mode. Current Scale:', currentScale);
+  }
+
+  function zoomOutAR() {
+    
+    const scaleFactor = 0.8;
+    currentScale *= scaleFactor;
+
+    
+    modelViewer.scale = currentScale;
+
+    console.log('Zooming out in AR mode. Current Scale:', currentScale);
+  }*/
+
+  //Animation play-pause
+  
+
+  // Event listeners for zoom in and out buttons
+  //plusButton.addEventListener('click', zoomInAR);
+  //minusButton.addEventListener('click', zoomOutAR);
+  /*let lastTapTime = 0;
+
+  modelViewer.addEventListener('click', function(event) {
+    const currentTime = new Date().getTime();
+    const tapTimeDifference = currentTime - lastTapTime;
+
+    if (tapTimeDifference < 300) {
+      // Double tap detected
+      if (modelViewer.paused) {
+        modelViewer.play();
+      } else {
+        modelViewer.pause();
+      }
+    }
+
+    lastTapTime = currentTime;
+  });*/
+</script>
+
+<script>
+     const modelViewer = document.getElementById('my-model');
+    document.getElementById('receive-gift-button').addEventListener('click', function() {
+        var audio = document.getElementById('audio');
+        audio.play();
+        modelViewer.play({repetitions: 1});
+    });
+
+    const arButton = document.getElementById('ar-button');
+    const arPopup = document.getElementById('ar-popup');
+
+    arButton.addEventListener('click', function() {
+        // Display the AR popup
+        arPopup.style.display = 'block';
+    });
+
+    const proceedButton = document.getElementById('proceed-button');
+    proceedButton.addEventListener('click', function() {
+        // Hide the AR popup when the "Proceed" button is clicked
+        arPopup.style.display = 'none';
+    });
+</script>
+
+
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.2.0/model-viewer.min.js"></script>
+</body>
+</html>
